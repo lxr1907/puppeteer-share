@@ -10,8 +10,8 @@ npm install cnpm -g --registry=https://registry.npm.taobao.org
 npm i puppeteer
 #or "yarn add puppeteer"
 
-# Example - navigating to https://example.com and saving a screenshot as example.png 网站截图案例:
-
+# Example  网站截图案例:
+- navigating to https://example.com and saving a screenshot as example.png
 Save file as example.js
 
 const puppeteer = require('puppeteer');
@@ -24,3 +24,5 @@ const puppeteer = require('puppeteer');
 
   await browser.close();
 })();
+# 运行测试
+node example.js
