@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 const puppeteer = require('puppeteer');
 var crypto = require('crypto');
-var md5 = crypto.createHash('md5');
 
 var app = express();
 // parse application/x-www-form-urlencoded
@@ -20,11 +19,9 @@ app.post('/htmlToPng', function (req, res) {
     var body = req.body;
     var url = body.url;
 
+    var md5 = crypto.createHash('md5');
     var fileName = md5.update(url).digest('hex');
 
-    res.send({
-        fileName: fileName
-    });
     (async () => {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
@@ -32,6 +29,10 @@ app.post('/htmlToPng', function (req, res) {
         await page.screenshot({path: 'public/img/' + fileName + '.png'});
         await browser.close();
     })();
+
+    res.send({
+        fileName: fileName
+    });
 })
 
 var server = app.listen(8081, function () {
