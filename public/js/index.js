@@ -10,7 +10,7 @@ $(function () {
                 dataType: "json",
                 success: function (ret) {
                     console.log(ret);
-                    $("#urlPng").attr('src', "/public/img/" + ret.fileName + ".png");
+                    $("#urlPng").attr('src', "/public/img/" + ret.fileName + ".png?nocache=" + Math.random());
                 }
             }
         );

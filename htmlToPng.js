@@ -25,6 +25,11 @@ app.post('/htmlToPng', function (req, res) {
     (async () => {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
+        await page.setViewport({
+            isMobile: true,
+            width: 600,
+            height: 1200
+        });
         await page.goto(url);
         await page.screenshot({path: 'public/img/' + fileName + '.png'});
         await browser.close();
