@@ -24,5 +24,5 @@ const puppeteer = require('puppeteer');
 
   await browser.close();
 })();
-# 运行测试
+# run 运行测试
 node example.js
