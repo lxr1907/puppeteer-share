@@ -1,10 +1,37 @@
 var express = require('express');
-var app = express();
+var bodyParser = require('body-parser');
+const puppeteer = require('puppeteer');
+var crypto = require('crypto');
+var md5 = crypto.createHash('md5');
 
+var app = express();
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: false}))
+
+// parse application/json
+app.use(bodyParser.json())
 app.use('/public', express.static('public'));
 
 app.get('/', function (req, res) {
     res.send('Hello World');
+})
+
+app.post('/htmlToPng', function (req, res) {
+    var body = req.body;
+    var url = body.url;
+
+    var fileName = md5.update(url).digest('hex');
+
+    res.send({
+        fileName: fileName
+    });
+    (async () => {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto(url);
+        await page.screenshot({path: 'public/img/' + fileName + '.png'});
+        await browser.close();
+    })();
 })
 
 var server = app.listen(8081, function () {
