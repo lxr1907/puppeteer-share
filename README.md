@@ -25,4 +25,4 @@ const puppeteer = require('puppeteer');
   await browser.close();
 })();
 # run 运行测试
-node example.js
+node htmlToPng.js
