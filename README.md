@@ -1,4 +1,5 @@
 # puppeteer-share
+截取html页面生成海报图片
 use puppeteer to generate share picuture from any website
 使用puppeteer框架，针对某个网站生成分享图
 
